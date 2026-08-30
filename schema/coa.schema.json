@@ -1,0 +1,241 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/mitwellnessusa/coa-schema/main/schema/coa.schema.json",
+  "title": "Certificate of Analysis",
+  "description": "A machine-readable representation of a certificate of analysis for a single production lot of a botanical or dietary supplement product. Describes what a COA states; it does not assert that any stated result is correct.",
+  "type": "object",
+  "required": ["schema_version", "document", "product", "laboratory", "results"],
+  "additionalProperties": false,
+
+  "properties": {
+    "schema_version": {
+      "description": "Version of this schema the document was written against.",
+      "type": "string",
+      "const": "1.0"
+    },
+
+    "document": {
+      "description": "Identity and provenance of the certificate itself, as distinct from the product it describes.",
+      "type": "object",
+      "required": ["document_id", "date_issued"],
+      "additionalProperties": false,
+      "properties": {
+        "document_id": {
+          "description": "Identifier for this certificate, unique within the issuing laboratory.",
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "description": "Revision number. A reissued certificate increments this.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "date_issued": { "$ref": "#/$defs/date" },
+        "supersedes": {
+          "description": "document_id of the certificate this one replaces, if any.",
+          "type": "string"
+        },
+        "authorized_by": {
+          "description": "Name and title of the person who released the certificate.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name": { "type": "string", "minLength": 1 },
+            "title": { "type": "string" }
+          },
+          "required": ["name"]
+        }
+      }
+    },
+
+    "product": {
+      "description": "The material tested. A certificate covers exactly one lot.",
+      "type": "object",
+      "required": ["name", "lot_identifier"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "lot_identifier": {
+          "description": "The lot or batch code printed on the product. Without this the certificate cannot be matched to physical product, which is the single most common defect in published COAs.",
+          "type": "string",
+          "minLength": 1
+        },
+        "sku": { "type": "string" },
+        "form": {
+          "description": "Physical form of the tested material.",
+          "type": "string",
+          "enum": ["powder", "capsule", "tablet", "liquid", "extract", "tincture", "softgel", "gummy", "raw_material", "other"]
+        },
+        "botanical_name": {
+          "description": "Binomial name where the product is a botanical.",
+          "type": "string"
+        },
+        "manufacturer": { "$ref": "#/$defs/organization" },
+        "date_manufactured": { "$ref": "#/$defs/date" },
+        "quantity_tested": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["value", "unit"],
+          "properties": {
+            "value": { "type": "number", "exclusiveMinimum": 0 },
+            "unit": { "type": "string" }
+          }
+        }
+      }
+    },
+
+    "laboratory": {
+      "description": "The testing laboratory. An unnamed laboratory makes a certificate unverifiable.",
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "address": { "type": "string" },
+        "accreditation": {
+          "description": "Accreditation held by the laboratory, e.g. ISO/IEC 17025:2017.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["standard"],
+            "additionalProperties": false,
+            "properties": {
+              "standard": { "type": "string", "minLength": 1 },
+              "accrediting_body": { "type": "string" },
+              "certificate_number": { "type": "string" },
+              "expires": { "$ref": "#/$defs/date" }
+            }
+          }
+        },
+        "independent": {
+          "description": "True when the laboratory is not owned by or affiliated with the manufacturer. Omit rather than guess.",
+          "type": "boolean"
+        },
+        "contact": { "type": "string" }
+      }
+    },
+
+    "sampling": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "date_received": { "$ref": "#/$defs/date" },
+        "date_tested": { "$ref": "#/$defs/date" },
+        "sampled_by": {
+          "type": "string",
+          "enum": ["laboratory", "client", "third_party", "unknown"]
+        },
+        "condition_on_receipt": { "type": "string" }
+      }
+    },
+
+    "results": {
+      "description": "One entry per analyte measured. An empty array is not a certificate.",
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/result" }
+    },
+
+    "notes": { "type": "string" },
+
+    "source": {
+      "description": "Where this record was transcribed from.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "url": { "type": "string", "format": "uri" },
+        "retrieved": { "$ref": "#/$defs/date" },
+        "transcribed_by": { "type": "string" }
+      }
+    }
+  },
+
+  "$defs": {
+    "date": {
+      "description": "Calendar date, ISO 8601, YYYY-MM-DD. Relative dates are not representable by design.",
+      "type": "string",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+
+    "organization": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "address": { "type": "string" },
+        "identifier": {
+          "description": "Registry identifier, e.g. an FDA establishment number.",
+          "type": "string"
+        }
+      }
+    },
+
+    "result": {
+      "type": "object",
+      "required": ["analyte", "panel", "method"],
+      "additionalProperties": false,
+      "properties": {
+        "analyte": {
+          "description": "Substance measured, e.g. 'Lead', 'Mitragynine', 'Total aerobic microbial count'.",
+          "type": "string",
+          "minLength": 1
+        },
+        "panel": {
+          "description": "Which test panel this result belongs to.",
+          "type": "string",
+          "enum": ["potency", "heavy_metals", "microbial", "pesticides", "residual_solvents", "mycotoxins", "moisture", "identity", "other"]
+        },
+        "method": {
+          "description": "Analytical method, e.g. 'ICP-MS', 'HPLC-UV', 'USP <2021>'. A result without a method cannot be compared to another laboratory's result.",
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "description": "Numeric result. Omit when the result is non-numeric or below the limit of quantitation; use value_qualifier instead.",
+          "type": "number",
+          "minimum": 0
+        },
+        "value_qualifier": {
+          "description": "Used when a numeric value is not the correct representation.",
+          "type": "string",
+          "enum": ["below_loq", "below_lod", "not_detected", "detected", "pass", "fail", "not_tested"]
+        },
+        "unit": { "$ref": "#/$defs/unit" },
+        "limit_of_quantitation": { "type": "number", "minimum": 0 },
+        "limit_of_detection": { "type": "number", "minimum": 0 },
+        "specification": {
+          "description": "The acceptance criterion this result was judged against.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "operator": {
+              "type": "string",
+              "enum": ["<=", "<", ">=", ">", "==", "absent_in", "range"]
+            },
+            "value": { "type": "number" },
+            "min": { "type": "number" },
+            "max": { "type": "number" },
+            "unit": { "$ref": "#/$defs/unit" },
+            "source": {
+              "description": "Where the criterion comes from, e.g. 'USP', 'AHPA', 'internal'.",
+              "type": "string"
+            }
+          }
+        },
+        "outcome": {
+          "description": "The laboratory's stated judgement. Validated against specification and value by the consistency rules, which is where most real defects surface.",
+          "type": "string",
+          "enum": ["pass", "fail", "not_applicable", "informational"]
+        }
+      }
+    },
+
+    "unit": {
+      "description": "Unit of measure. ppm and mg/kg are equivalent; ppb is one thousandth of ppm, and confusing the two is a 1000x error that appears in real certificates.",
+      "type": "string",
+      "enum": ["mg/kg", "ug/kg", "mg/g", "ug/g", "ppm", "ppb", "percent", "mg/mL", "mg/serving", "CFU/g", "MPN/g", "cfu/mL", "count", "unitless"]
+    }
+  }
+}
