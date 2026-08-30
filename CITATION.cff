@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+title: "COA Schema: a machine-readable format for certificates of analysis"
+message: "If you use this schema or validator, please cite it."
+type: software
+authors:
+  - name: "MitWellness"
+repository-code: "https://github.com/mitwellnessusa/coa-schema"
+url: "https://coa-schema.readthedocs.io/"
+license: MIT
+version: "1.0.0"
+date-released: "2026-08-30"
+keywords:
+  - certificate of analysis
+  - JSON Schema
+  - laboratory testing
+  - dietary supplements
