@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0",
+  "document": {
+    "document_id": "LAB-2026-004471",
+    "revision": 0,
+    "date_issued": "2026-03-14",
+    "authorized_by": { "name": "A. Whitfield", "title": "Laboratory Director" }
+  },
+  "product": {
+    "name": "Example Botanical Powder",
+    "lot_identifier": "EBP-2601-0087",
+    "form": "powder",
+    "botanical_name": "Piper methysticum",
+    "manufacturer": { "name": "Example Botanicals LLC", "address": "Wichita, KS, USA" },
+    "date_manufactured": "2026-02-19",
+    "quantity_tested": { "value": 50, "unit": "g" }
+  },
+  "laboratory": {
+    "name": "Midwest Analytical Services",
+    "address": "Columbia, MO, USA",
+    "independent": true,
+    "accreditation": [
+      {
+        "standard": "ISO/IEC 17025:2017",
+        "accrediting_body": "A2LA",
+        "certificate_number": "4471.02",
+        "expires": "2027-06-30"
+      }
+    ]
+  },
+  "sampling": {
+    "date_received": "2026-02-27",
+    "date_tested": "2026-03-05",
+    "sampled_by": "client",
+    "condition_on_receipt": "sealed, ambient"
+  },
+  "results": [
+    {
+      "analyte": "Kavalactones",
+      "panel": "potency",
+      "method": "HPLC-UV",
+      "value": 32.4,
+      "unit": "percent",
+      "specification": { "operator": "range", "min": 30, "max": 70, "unit": "percent", "source": "internal" },
+      "outcome": "pass"
+    },
+    {
+      "analyte": "Lead",
+      "panel": "heavy_metals",
+      "method": "ICP-MS",
+      "value": 0.21,
+      "unit": "mg/kg",
+      "limit_of_quantitation": 0.05,
+      "specification": { "operator": "<=", "value": 1.0, "unit": "mg/kg", "source": "USP" },
+      "outcome": "pass"
+    },
+    {
+      "analyte": "Arsenic",
+      "panel": "heavy_metals",
+      "method": "ICP-MS",
+      "value_qualifier": "below_loq",
+      "unit": "mg/kg",
+      "limit_of_quantitation": 0.05,
+      "specification": { "operator": "<=", "value": 1.5, "unit": "mg/kg", "source": "USP" },
+      "outcome": "pass"
+    },
+    {
+      "analyte": "Cadmium",
+      "panel": "heavy_metals",
+      "method": "ICP-MS",
+      "value": 0.04,
+      "unit": "mg/kg",
+      "limit_of_quantitation": 0.02,
+      "specification": { "operator": "<=", "value": 0.5, "unit": "mg/kg", "source": "USP" },
+      "outcome": "pass"
+    },
+    {
+      "analyte": "Mercury",
+      "panel": "heavy_metals",
+      "method": "ICP-MS",
+      "value_qualifier": "below_loq",
+      "unit": "mg/kg",
+      "limit_of_quantitation": 0.01,
+      "specification": { "operator": "<=", "value": 1.5, "unit": "mg/kg", "source": "USP" },
+      "outcome": "pass"
+    },
+    {
+      "analyte": "Total aerobic microbial count",
+      "panel": "microbial",
+      "method": "USP <2021>",
+      "value": 1200,
+      "unit": "CFU/g",
+      "specification": { "operator": "<=", "value": 100000, "unit": "CFU/g", "source": "USP" },
+      "outcome": "pass"
+    },
+    {
+      "analyte": "Salmonella",
+      "panel": "microbial",
+      "method": "USP <2022>",
+      "value_qualifier": "not_detected",
+      "specification": { "operator": "absent_in", "source": "USP" },
+      "outcome": "pass"
+    }
+  ],
+  "source": {
+    "url": "https://example.com/coa/EBP-2601-0087.pdf",
+    "retrieved": "2026-03-20",
+    "transcribed_by": "coa-schema example set"
+  }
+}
