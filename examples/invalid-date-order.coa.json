@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "document": { "document_id": "LAB-2026-000777", "date_issued": "2026-01-15" },
+  "product": { "name": "Time Travel Tincture", "lot_identifier": "TTT-001",
+               "date_manufactured": "2026-02-01" },
+  "laboratory": { "name": "Chronos Analytical", "independent": false },
+  "sampling": { "date_received": "2026-02-03", "date_tested": "2026-02-10" },
+  "results": [
+    { "analyte": "Lead", "panel": "heavy_metals", "method": "ICP-MS",
+      "value": 0.1, "unit": "mg/kg",
+      "limit_of_detection": 0.5, "limit_of_quantitation": 0.05,
+      "specification": { "operator": "<=", "value": 1.0, "unit": "mg/kg" },
+      "outcome": "pass" },
+    { "analyte": "Mystery", "panel": "other", "method": "unspecified" }
+  ]
+}
