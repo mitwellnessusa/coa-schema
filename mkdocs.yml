@@ -1,0 +1,25 @@
+site_name: COA Schema
+site_description: A JSON Schema for certificates of analysis, and a validator that checks a certificate against itself.
+site_url: https://coa-schema.readthedocs.io/
+repo_url: https://github.com/mitwellnessusa/coa-schema
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - content.code.copy
+
+nav:
+  - Overview: index.md
+  - Reading a certificate: reading-a-coa.md
+  - Field reference: fields.md
+  - Validation rules: rules.md
+  - Using the validator: usage.md
+
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.superfences
