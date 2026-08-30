@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "document": { "document_id": "LAB-2026-000455", "date_issued": "2026-04-10" },
+  "product": { "name": "Contradiction Extract", "lot_identifier": "CE-2604-001" },
+  "laboratory": {
+    "name": "Riverbend Labs",
+    "accreditation": [{ "standard": "ISO/IEC 17025:2017", "expires": "2025-01-01" }]
+  },
+  "sampling": { "date_tested": "2026-04-05" },
+  "results": [
+    { "analyte": "Lead", "panel": "heavy_metals", "method": "ICP-MS",
+      "value": 4.2, "unit": "mg/kg",
+      "specification": { "operator": "<=", "value": 1.0, "unit": "mg/kg" },
+      "outcome": "pass" },
+    { "analyte": "Arsenic", "panel": "heavy_metals", "method": "ICP-MS",
+      "value": 900, "unit": "ppb",
+      "specification": { "operator": "<=", "value": 1.5, "unit": "mg/kg" },
+      "outcome": "pass" },
+    { "analyte": "Total alkaloids", "panel": "potency", "method": "HPLC-UV",
+      "value": 2.1, "unit": "percent",
+      "specification": { "operator": ">=", "value": 1.0, "unit": "percent" },
+      "outcome": "fail" },
+    { "analyte": "Salmonella", "panel": "microbial", "method": "USP <2022>",
+      "value_qualifier": "detected",
+      "specification": { "operator": "absent_in" },
+      "outcome": "pass" }
+  ]
+}
