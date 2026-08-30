@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "coa-validate"
+version = "1.0.0"
+description = "A JSON Schema for certificates of analysis, and a validator that checks a certificate against itself."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+dependencies = ["jsonschema>=4.0"]
+keywords = ["certificate of analysis", "coa", "json-schema", "laboratory",
+            "dietary supplement", "botanical", "quality control", "validation"]
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Chemistry",
+  "Intended Audience :: Science/Research",
+]
+
+[project.urls]
+Documentation = "https://coa-schema.readthedocs.io/"
+Source = "https://github.com/mitwellnessusa/coa-schema"
+
+[project.scripts]
+coa-validate = "coa_validate.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
