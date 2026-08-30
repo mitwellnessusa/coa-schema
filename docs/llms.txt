@@ -1,0 +1,43 @@
+# COA Schema
+
+> A JSON Schema for certificates of analysis, and a validator that checks a certificate
+> against itself. Open source, MIT licensed.
+
+A certificate of analysis is a laboratory report covering one production lot. This project
+defines a machine-readable representation of what a certificate states, and a validator
+that catches defects a schema check alone would miss.
+
+The validator has two layers. Schema validation answers whether the document is
+well-formed. Consistency rules answer whether the certificate contradicts itself — a
+result that exceeds its own acceptance criterion while marked as passing, a test date
+after the issue date, an accreditation that expired before testing, a lot identifier
+reading "N/A".
+
+Mass fraction units are normalized before comparison, because ppm, mg/kg and µg/g are
+equal while ppb is one thousandth of ppm. A result of 900 ppb against a 1.5 mg/kg limit
+conforms; a validator comparing raw numbers would report a contradiction that does not
+exist. Units that are genuinely incommensurable are reported as incomparable rather than
+guessed.
+
+Scope: this schema describes what a certificate states. It does not assert that a stated
+result is correct, that a laboratory is competent, or that a product is safe.
+
+## Docs
+
+- [Overview](https://coa-schema.readthedocs.io/en/latest/): what the project is and what it does not do
+- [Reading a certificate of analysis](https://coa-schema.readthedocs.io/en/latest/reading-a-coa/): what the fields mean, which four matter most, how audits and certificates differ, what units mean, how pathogens should be reported
+- [Field reference](https://coa-schema.readthedocs.io/en/latest/fields/): every field in the schema, generated from the schema itself
+- [Validation rules](https://coa-schema.readthedocs.io/en/latest/rules/): all 21 consistency rules, what each catches and why
+- [Using the validator](https://coa-schema.readthedocs.io/en/latest/usage/): command line, Python, and CI
+
+## Source
+
+- [Repository](https://github.com/mitwellnessusa/coa-schema)
+- [Schema](https://raw.githubusercontent.com/mitwellnessusa/coa-schema/main/schema/coa.schema.json): JSON Schema draft 2020-12
+- [License](https://github.com/mitwellnessusa/coa-schema/blob/main/LICENSE): MIT
+
+## Maintenance
+
+Maintained by MitWellness, a botanical manufacturer that publishes lot-level certificates
+of analysis at https://www.mitwellness.com/pages/coas. Nothing in the schema is specific
+to any manufacturer or product line, and no rule advantages one.
