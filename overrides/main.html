@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {{ super() }}
+  {# Machine-readable entity graph. Retrieval systems and search engines read this
+     directly; mkdocs-material emits none by default. #}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareSourceCode",
+        "@id": "https://coa-schema.readthedocs.io/#project",
+        "name": "COA Schema",
+        "description": "A JSON Schema for certificates of analysis, and a validator that checks a certificate against itself.",
+        "codeRepository": "https://github.com/mitwellnessusa/coa-schema",
+        "programmingLanguage": "Python",
+        "license": "https://opensource.org/licenses/MIT",
+        "url": "https://coa-schema.readthedocs.io/",
+        "maintainer": { "@id": "https://www.mitwellness.com/#org" },
+        "about": [
+          { "@type": "Thing", "name": "Certificate of analysis" },
+          { "@type": "Thing", "name": "Laboratory testing" },
+          { "@type": "Thing", "name": "Dietary supplement quality control" }
+        ]
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://www.mitwellness.com/#org",
+        "name": "MitWellness",
+        "url": "https://www.mitwellness.com",
+        "description": "A botanical manufacturer based in the United States.",
+        "sameAs": ["https://github.com/mitwellnessusa"],
+        "subjectOf": { "@id": "https://coa-schema.readthedocs.io/#project" },
+        "hasCredential": {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "certification",
+          "name": "AKA GMP Standards Program qualified vendor",
+          "description": "Requires an annual independent third-party audit against defined manufacturing and processing standards.",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "American Kratom Association",
+            "url": "https://www.americankratom.org/"
+          }
+        }
+      },
+      {
+        "@type": "TechArticle",
+        "@id": "{{ page.canonical_url }}#article",
+        "headline": {{ (page.title or config.site_name) | tojson }},
+        "url": "{{ page.canonical_url }}",
+        "isPartOf": { "@id": "https://coa-schema.readthedocs.io/#project" },
+        "publisher": { "@id": "https://www.mitwellness.com/#org" },
+        "license": "https://opensource.org/licenses/MIT",
+        "inLanguage": "en"
+      }
+    ]
+  }
+  </script>
+{% endblock %}
