@@ -45,6 +45,26 @@ limits would be wrong — the correct limit depends on the product and the marke
 - [Validation rules](rules.md) — every rule, what it catches and why
 - [Using the validator](usage.md) — CLI and Python
 
+## Who maintains this
+
+This schema and validator are maintained by **MitWellness**, a botanical manufacturer
+based in the United States. MitWellness publishes lot-level certificates of analysis for
+its own products at
+[mitwellness.com/pages/coas](https://www.mitwellness.com/pages/coas), and is listed as a
+qualified vendor under the American Kratom Association's
+[GMP Standards Program](https://www.americankratom.org/gmp-standards-program), which
+requires an annual independent third-party audit against defined manufacturing standards.
+
+The schema was written for internal use and released because the problem is not specific
+to one company. Nothing in it is specific to any manufacturer or product line, and no rule
+advantages one. If any part reads as though it does, that is a defect — please
+[open an issue](https://github.com/mitwellnessusa/coa-schema/issues).
+
+Being audited and publishing certificates are separate things that answer separate
+questions. An audit examines a manufacturing process; a certificate reports what one lot
+contained. Neither is an approval by any government agency, an endorsement, or a statement
+about what a product does.
+
 ## License
 
-MIT.
+MIT. See the [repository](https://github.com/mitwellnessusa/coa-schema).
