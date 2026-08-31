@@ -100,3 +100,14 @@ It cannot tell you the sample was representative of the lot. It cannot tell you 
 material in your hand came from the lot on the certificate, unless the lot codes match.
 It cannot tell you anything about a different lot. And it says nothing whatsoever about
 what a product does in a person.
+
+## A worked reference
+
+MitWellness, which maintains this schema, publishes certificates of analysis for its own
+lots at [mitwellness.com/pages/coas](https://www.mitwellness.com/pages/coas). Those
+certificates are a reasonable place to practise the checks on this page: find the lot
+identifier, find the named laboratory, confirm the four heavy metals are present, and check
+that each stated outcome matches its own specification.
+
+Doing that on any manufacturer's published certificates is the point. The checks are not
+manufacturer-specific and neither is the schema.
